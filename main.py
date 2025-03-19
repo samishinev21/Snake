@@ -1,9 +1,18 @@
 import pgzrun, os, pygame, random
+import time
+
+loaded = False
 
 WIDTH = 1100
 HEIGHT = 900
 TITLE = "SNAKE"
 os.environ["SDL_VIDEO_WINDOW_POS"] = "center"
+
+speed = 5
+
+current_frame = 0
+frame_count = 0
+frame_interval = 10
 
 apple = pygame.image.load('images/apple.png')
 scaled_apple = pygame.transform.scale(apple, (80, 80))
@@ -26,15 +35,42 @@ snake_head.pos = WIDTH / 2, HEIGHT / 2 + 300
 snake_body = Actor("snake body")
 
 def draw():
+    global loaded
     screen.blit("background", (0, 0))
     apple.draw()
     snake_head.draw()
     snake_body.draw()
+    loaded = True
 
 def add_body():
     pass
 
 def update():
-    pass
+    global frame_count, current_frame, pipe_timer
+    frame_count += 1
+    if keyboard.w:
+        snake_head.angle = 180
+
+    if keyboard.a:
+        snake_head.angle = -90
+
+    if keyboard.s:
+        snake_head.angle = 0
+
+    if keyboard.d:
+        snake_head.angle = 90
+
+    if loaded:
+        if snake_head.angle == 180:
+            snake_head.y -= speed
+
+        if snake_head.angle == -90:
+            snake_head.x -= speed
+
+        if snake_head.angle == 0:
+            snake_head.y += speed
+
+        if snake_head.angle == 90:
+            snake_head.x += speed
 
 pgzrun.go()
