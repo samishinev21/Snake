@@ -49,16 +49,20 @@ def update():
     global frame_count, current_frame, pipe_timer
     frame_count += 1
     if keyboard.w:
-        snake_head.angle = 180
+        if snake_head.angle != 0:
+            snake_head.angle = 180
 
     if keyboard.a:
-        snake_head.angle = -90
+        if snake_head.angle != 90:
+            snake_head.angle = -90
 
     if keyboard.s:
-        snake_head.angle = 0
+        if snake_head.angle != 180:
+            snake_head.angle = 0
 
     if keyboard.d:
-        snake_head.angle = 90
+        if snake_head.angle != -90:
+            snake_head.angle = 90
 
     if loaded:
         if snake_head.angle == 180:
