@@ -1,5 +1,5 @@
 import pgzrun, os, pygame, random
-import time
+
 
 loaded = False
 
